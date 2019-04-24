@@ -3,15 +3,22 @@
 
 //questions 
 var questions = require('../content/questions');
-// console.log(questions); // it works. 
+var friendsList = require('../data/friends');
 
 
-
-function apiJourneys(app){
+function apiJourneys(app) {
   app.get("/api/questions", function (req, res) {
-    res.json(questions);
-  });
+    res.json(questions)
+  })
   
+  app.get('/api/friendsList', function (req, res) {
+    res.json(friendsList)
+  })
+
+  app.post('/api/friendsList', function (req, res) {
+    friendsList.push(req.body)
+  })
+
 }
 
 module.exports = apiJourneys; 

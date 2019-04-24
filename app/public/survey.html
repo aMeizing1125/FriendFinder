@@ -57,31 +57,167 @@
 
   </div>
 
-  <!-- Modal -->
-  <div id="results-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+  <!-- Modal copied from view page source. I kept it for now since it is down the road from where I am currently coding.  -->
+  <!-- <div id="results-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog"> -->
 
-      <!-- Modal content-->
-      <div class="modal-content">
+  <!-- Modal content-->
+  <!-- <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h2 class="modal-title"><strong>Best Match</strong></h2>
         </div>
         <div class="modal-body">
-          <h2 id="match-name"></h2>
-          <!-- <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt=""> -->
-        </div>
+          <h2 id="match-name"></h2> -->
+  <!-- <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt=""> -->
+  <!-- </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
 
     </div>
-  </div>
+  </div> -->
 
   <script type="text/javascript">
-  console.log("working");
-    //testing questions.
+    // console.log("working");
+
+
+    $.get("api/questions", function (
+      questionsArray) { // questionsArray is a parameter not a placeholder since it possess an actual value. 
+      // console.log(questionsArray);
+      //make this into a temporate literal? but how would we forloop 
+      answers = ["",
+        "1 - Strongly Disagree",
+        "2",
+        "3",
+        "4",
+        "5 - Strongly Agree"
+      ];
+
+      // for loop questions
+      for (i = 0; i < questionsArray.length; i++) {
+        questionBox = $('<div>');
+        //.addClass("qBox");
+        thisQuestion = $('<div>').text(questionsArray[i]);
+        // temporate literals. yay! data
+        //dropDown
+        dropDown = $(`<select class="question" data-question-number="${i}">`);
+
+        for (a = 0; a < answers.length; a++) {
+          option = $('<option>').text(answers[a]);
+          //attempt at adding value to each option
+          option.val(a); //value so you can add up the absolute difference between the 
+          //brackets aren't necessary option.val([a]); i didn't know that. 
+          // console.log(answers[a]);
+          dropDown.append(option);
+        }
+
+        questionBox.append(thisQuestion, dropDown);
+        $('.surveyArea').append(questionBox)
+
+      }
+    })
+    //(optional) if I have time workthrough this with template literals. 
+
+    //on click event for submit button to capture everything. 
+    $('#submit').on("click", function () {
+      // console.log("submit BTN onclick working ");
+      newProfile = {}; //object
+      answersArr = [];
+
+      newProfile.name = $('#name').val();
+      newProfile.photo = $('#photo').val();
+
+      allAnswers = $(".question  option:selected").each(function (i, thisAnswer) {
+        // console.log(thisAnswer);
+
+        answerVal = $(this).attr("value");
+        // console.log(answerVal);
+
+        answersArr.push(parseInt(answerVal)); // it console.logs it as a number but when it posts it actually 
+
+        alert('Thank you for completing your survey!');
+      });
+
+      matching(answersArr);
+      newProfile.survey = answersArr;
+
+      // console.log(newProfile);
+
+      // matching(); // commented this out while building out the functionality 
+
+      // postProfile();//comment this out while building out the matching()
+
+
+    });
+
+    function matching(userAnswers) {
+      // you need to matching/compare the newProfile survey forEach friendsList
+      //matching array, matching totals, Math.abs(x), 
+      //just which ever total is the closest. 
+      console.log(userAnswers);
+      $.get("api/friendsList", function (allProfiles) {
+        allProfiles.forEach(function (thisProfile) {
+          console.log(thisProfile);
+          line();
+          matchAnswers = thisProfile.survey;
+
+          // console.log(matchAnswers);
+          matchScore = 0;
+
+          for (i = 0; i < matchAnswers.length; i++) {
+            //variables first. 
+            matchmateAnswer = matchAnswers[i];
+            console.log("matchmateAnswer " + matchmateAnswer);
+            userAnswer = answersArr[i];
+            console.log("userAnswer" + userAnswer);
+            theDiffernce = Math.abs(matchmateAnswer - userAnswer);
+            console.log(theDiffernce);
+            matchScore += theDiffernce; //short hand for matchScore = matchScore + theDifference
+            line();
+          }
+          
+          console.log(matchScore);
+        });
+        // console.log();
+
+      })
+    };
+
+    function postProfile() {
+      $.post("api/friendsList", newProfile, function (data) {
+        if (data) {
+          console.log("yeah bitches!");
+        }
+      })
+    }
+
+    //validate the answers so it actually 
+
+
+    //post to friends.js
+    //this was taken from activity in class. 
+
+    // app.post("/api/friends", function(req, res) {
+
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body parsing middleware
+    // var newFriend = req.body;
+
+    // Using a RegEx Pattern to remove spaces from newCharacter
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    //   newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+
+    //   console.log(newcharacter);
+
+    //   characters.push(newcharacter);
+
+    //   res.json(newcharacter);
+    // });
+
+
+    //testing questions.//practicing  
     // dont add the localhost. think domain name for website.. you don't add it. 
     // Set up API that sends all the questions as json data into a page. This is because you can't require in script only node. 
 
@@ -110,41 +246,9 @@
     //   console.log(questionArr[i]);
 
     // })
-
-
-    $.get("api/questions", function (questionsArray) { // questionsArray is a parameter not a placeholder since it possess an actual value. 
-      // console.log(questionsArray);
-      answers = ["",
-        "1 - Strongly Disagree",
-        "2",
-        "3",
-        "4",
-        "5 - Strongly Agree"];
-
-      // for loop questions
-      for (i = 0; i < questionsArray.length; i++) {
-        questionBox = $('<div>');
-        //.addClass("qBox");
-        thisQuestion = $('<div>').text(questionsArray[i]);
-
-        dropDown = $('<select>');
-
-        for (a = 0; a < answers.length; a++) {
-          option = $('<option>').text(answers[a]);
-          dropDown.append(option);
-        }
-
-        questionBox.append(thisQuestion, dropDown);
-        $('.surveyArea').append(questionBox)
-
-      }
-    })
-    //if I have time workthrough this with template literals. 
-
-
-
-
-
+    function line() {
+      console.log("--------------");
+    }
   </script>
 
 </body>

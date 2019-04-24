@@ -6,26 +6,23 @@
 var path = require('path');
 
 
-//Option 1 like activities taught in class.  
+//Option 1 - This is basically copied from the activities taught in class.  
 // module.exports = function (app) { //app can be named anything and is just running express. 
-
   // app.get('/', function (req, res) {
   //   // res.send('Hello World');
   //   res.sendFile(path.join(__dirname, "../public/home.html"));
   // });
-
-  // // app.get("/survey", function (req, res) {
+  // // app.get("/survey", function (req, res) { 
   //   res.sendFile(path.join(__dirname, "../public/survey.html"));
   // });
-
   // app.get("/api/friends", function (req, res) {
   //   res.sendFile(path.join(__dirname, "all.html"));
   // });
-
 // }
 
-// Option2 breaking it apart.. compartmentatlizing. 
 
+
+// Option2 breaking it apart.. compartmentatlizing. 
 function journeys(app) {
   app.get('/', function (req, res) {
     // res.send('Hello World');
@@ -37,7 +34,7 @@ function journeys(app) {
   });
 
   // app.get("/api/friends", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "all.html"));
+  //   res.sendFile(path.join(__dirname, "../data/something.html")); //this is not the right file path (placeholder)
   // });
 }
 
