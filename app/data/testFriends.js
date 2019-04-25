@@ -2,7 +2,7 @@
 var testProfile = [
 {
   name:"Pickles",
-  photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+  photo:"https://cdn-us-ec.yottaa.net/57f4626c312e584b1a000020/o~f_webp/v~4b.193.0.0/https://www.tillys.com/dw/image/v2/BBLQ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw21e57e68/tillys/images/catalog/1000x1000/339737500.jpg?sw=539&sh=693&sm=fit",
   survey:[
       5,
       1,
@@ -18,7 +18,7 @@ var testProfile = [
 },
 {
   name:"Jonathan",
-  photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+  photo:"https://images.unsplash.com/photo-1524860363694-645e3377427d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
   survey:[
       2,
       5,
@@ -34,7 +34,7 @@ var testProfile = [
   }, 
   {
     name:"Kevin",
-    photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    photo:"https://hips.hearstapps.com/wdy.h-cdn.co/assets/cm/15/10/480x240/54f5f978eea3a_-_01-pickle-on-white-lgn-41585088.jpg?resize=980:*",
     survey:[
         1,
         1,
@@ -50,7 +50,7 @@ var testProfile = [
     }, 
     {
       name:"Darin",
-      photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+      photo:"https://media.licdn.com/dms/image/C5103AQE1hdiN4tU1bA/profile-displayphoto-shrink_800_800/0?e=1561593600&v=beta&t=grZHtdADrTC3pr4b1t2fwQW0d2CA7WPOcafsjQOz8xo",
       survey:[
           1,
           5,
@@ -66,7 +66,7 @@ var testProfile = [
       }, 
       {
         name:"Alyssa",
-        photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        photo:"https://media.licdn.com/dms/image/C4D03AQFwhZAH1o09AQ/profile-displayphoto-shrink_800_800/0?e=1561593600&v=beta&t=rOJ1uveNbKMNA-yqSN1pahdZEtuNCP2ZSRPcZVudNZg",
         survey:[
             5,
             5,
