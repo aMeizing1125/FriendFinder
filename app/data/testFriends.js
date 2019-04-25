@@ -1,7 +1,7 @@
 
 var testProfile = [
 {
-  name:"Charming",
+  name:"Pickles",
   photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
   survey:[
       5,
@@ -31,7 +31,55 @@ var testProfile = [
       4,
       2
     ]
-  }
+  }, 
+  {
+    name:"Kevin",
+    photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    survey:[
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }, 
+    {
+      name:"Darin",
+      photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+      survey:[
+          1,
+          5,
+          1,
+          1,
+          5,
+          1,
+          1,
+          4,
+          4,
+          1
+        ]
+      }, 
+      {
+        name:"Alyssa",
+        photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        survey:[
+            5,
+            5,
+            5,
+            2,
+            5,
+            5,
+            2,
+            4,
+            4,
+            5
+          ]
+        }
 ]
 
 
