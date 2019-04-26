@@ -1,7 +1,7 @@
 
 var testProfile = [
 {
-  name:"Pickles",
+  name:"Rick Pickle",
   photo:"https://cdn-us-ec.yottaa.net/57f4626c312e584b1a000020/o~f_webp/v~4b.193.0.0/https://www.tillys.com/dw/image/v2/BBLQ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw21e57e68/tillys/images/catalog/1000x1000/339737500.jpg?sw=539&sh=693&sm=fit",
   survey:[
       5,
@@ -34,9 +34,9 @@ var testProfile = [
   }, 
   {
     name:"Kevin",
-    photo:"https://hips.hearstapps.com/wdy.h-cdn.co/assets/cm/15/10/480x240/54f5f978eea3a_-_01-pickle-on-white-lgn-41585088.jpg?resize=980:*",
+    photo:"https://www.adobe.com/content/dam/acom/en/devnet/authors/bio/k/kevin_fauth_bio.jpg",
     survey:[
-        1,
+        2,
         1,
         1,
         1,
@@ -54,8 +54,8 @@ var testProfile = [
       survey:[
           1,
           5,
-          1,
-          1,
+          4,
+          4,
           5,
           1,
           1,

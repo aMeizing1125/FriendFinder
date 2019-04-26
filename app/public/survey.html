@@ -18,11 +18,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 
   <style>
-    .newDiv{
+    .newDiv {
       display: flex;
       flex-direction: column;
       justify-content: center;
       font-size: 35px;
+    }
+
+    img {
+      width: 200px;
     }
   </style>
 
@@ -105,43 +109,45 @@
     };
     //end of findMinIndex()
 
+    function renderSurvey() {
+      $.get("api/questions", function (questionsArray) {
 
-    $.get("api/questions", function (questionsArray) {
+        answers = ["",
+          "1 - Strongly Disagree",
+          "2",
+          "3",
+          "4",
+          "5 - Strongly Agree"
+        ];
 
-      answers = ["",
-        "1 - Strongly Disagree",
-        "2",
-        "3",
-        "4",
-        "5 - Strongly Agree"
-      ];
+        // for loop questions
+        for (i = 0; i < questionsArray.length; i++) {
+          questionBox = $('<div>');
+          thisQuestion = $('<div>').text(questionsArray[i]);
+          dropDown = $(`<select class="question" data-question-number="${i}">`);
 
-      // for loop questions
-      for (i = 0; i < questionsArray.length; i++) {
-        questionBox = $('<div>');
-        thisQuestion = $('<div>').text(questionsArray[i]);
-        dropDown = $(`<select class="question" data-question-number="${i}">`);
-
-        for (a = 0; a < answers.length; a++) {
-          option = $('<option>').text(answers[a]);
-          option.val(a);
-          dropDown.append(option);
+          for (a = 0; a < answers.length; a++) {
+            option = $('<option>').text(answers[a]);
+            option.val(a);
+            dropDown.append(option);
+          }
+          //end of answers for loop
+          //************************
+          questionBox.append(thisQuestion, dropDown);
+          $('.surveyArea').append(questionBox)
+          //************************
         }
-        //end of answers for loop
-        //************************
-        questionBox.append(thisQuestion, dropDown);
-        $('.surveyArea').append(questionBox)
-        //************************
-      }
-      //end of questions for loop
-    })
-    //end of $.get("api/questions")
-
+        //end of questions for loop
+      })
+      //end of $.get("api/questions")
+    }
+    //end of renderSurvey()
+    renderSurvey();
     $('#submit').on("click", function () {
       //create an if statement that prevents the "" option from being selected. 
-      
+
       // console.log("submit BTN onclick working ");
-    
+
       newProfile = {}; //object
       answersArr = [];
 
@@ -159,21 +165,19 @@
           allAnswered = false;
         }
 
-        answersArr.push(answerVal); // it console.logs it as a number but when it posts it actually
-        
+        answersArr.push(answerVal); // it console.logs it as a number but when it posts it actuall
       });
       //end of .each with .question class 
 
-      if(!allAnswered){
+      if (!allAnswered) {
         alert("Please answer all questions!");
-      }
-
-      else{
+      } else {
         matching(answersArr);
         newProfile.survey = answersArr;
         alert('Thank you for completing your survey! Please scroll down to meet your new best friend!');
       }
-
+      
+      renderSurvey();
     });
     //end of #submit on "click"
 
@@ -215,7 +219,7 @@
         newDiv = $('<div>').addClass("newDiv");
         bfName = allProfiles[matchIndex].name;
         bfPhotoSrc = allProfiles[matchIndex].photo;
-        bfPhoto = $('<img>').attr("src", bfPhotoSrc);       
+        bfPhoto = $('<img>').attr("src", bfPhotoSrc);
         bestFriendMatch = $('<div>').text(bfName);
         newDiv.append(bfName, bfPhoto);
         //final append
@@ -230,8 +234,17 @@
     function postProfile() {
       $.post("api/friendsList", newProfile, function (data) {
         if (data) {
-          // console.log("yeah bitches!");
+          console.log("postProfile() if ");
+
+        } else {
+          console.log("postProfile() else ")
         }
+
+        $("#name").val("");
+        $("#photo").val("");
+        //answer option
+
+
       })
     }
   </script>

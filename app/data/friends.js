@@ -1,4 +1,4 @@
-var testProfile = require('./testFriends'); //add .js if it doens't work 
+var testProfile = require('./testFriends'); 
 var friendsList = [];
 
 testProfile.forEach(function (thisUser) {
