@@ -17,6 +17,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 
+  <style>
+    .newDiv{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 35px;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -42,7 +51,9 @@
       <hr>
       <div class="friendMatchArea">
         <h4>Friend Match</h4>
+        <div class="results">
 
+        </div>
       </div>
     </div>
     <br>
@@ -84,8 +95,7 @@
         if (!min) {
           min = currentNum;
           minIndex = i;
-        }
-        else if (currentNum < min) {
+        } else if (currentNum < min) {
           min = currentNum;
           minIndex = i;
         }
@@ -128,26 +138,41 @@
     //end of $.get("api/questions")
 
     $('#submit').on("click", function () {
+      //create an if statement that prevents the "" option from being selected. 
+      
       // console.log("submit BTN onclick working ");
+    
       newProfile = {}; //object
       answersArr = [];
 
       newProfile.name = $('#name').val().trim();
       newProfile.photo = $('#photo').val().trim();
 
+      allAnswered = true;
+
       allAnswers = $(".question  option:selected").each(function (i, thisAnswer) {
         // console.log(thisAnswer);
-        answerVal = $(this).attr("value");
+        answerVal = parseInt($(this).attr("value"));
         // console.log(answerVal);
-        answersArr.push(parseInt(answerVal)); // it console.logs it as a number but when it posts it actually 
 
+        if (answerVal === 0) {
+          allAnswered = false;
+        }
 
+        answersArr.push(answerVal); // it console.logs it as a number but when it posts it actually
+        
       });
       //end of .each with .question class 
 
-      matching(answersArr);
-      newProfile.survey = answersArr;
-      alert('Thank you for completing your survey! Please scroll down to meet your new best friend!');
+      if(!allAnswered){
+        alert("Please answer all questions!");
+      }
+
+      else{
+        matching(answersArr);
+        newProfile.survey = answersArr;
+        alert('Thank you for completing your survey! Please scroll down to meet your new best friend!');
+      }
 
     });
     //end of #submit on "click"
@@ -186,16 +211,18 @@
         console.log(matchIndex);
         console.log(allProfiles[matchIndex]);
         //adding to front end. 
-        $('.friendMatchArea').empty();
-        newDiv = $('<div>');
-      bfName = allProfiles[matchIndex].name;
-      bfPhoto = allProfiles[matchIndex].photo;
-      bestFriendMatch = $('<div>').text(bfName, bfPhoto);
-      bestFriendMatch.append(newDiv);
-      $('.friendMatchArea').append(bestFriendMatch);
+        $('.results').empty();
+        newDiv = $('<div>').addClass("newDiv");
+        bfName = allProfiles[matchIndex].name;
+        bfPhotoSrc = allProfiles[matchIndex].photo;
+        bfPhoto = $('<img>').attr("src", bfPhotoSrc);       
+        bestFriendMatch = $('<div>').text(bfName);
+        newDiv.append(bfName, bfPhoto);
+        //final append
+        $('.results').append(newDiv);
       })
       //end of $.get
-      
+
 
     };
     //end of matching()
@@ -207,9 +234,6 @@
         }
       })
     }
-
-
-
   </script>
 
 </body>
