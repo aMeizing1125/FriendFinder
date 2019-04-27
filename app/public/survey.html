@@ -111,7 +111,7 @@
 
     function renderSurvey() {
       $.get("api/questions", function (questionsArray) {
-
+        $('.surveyArea').empty();
         answers = ["",
           "1 - Strongly Disagree",
           "2",
@@ -176,7 +176,8 @@
         newProfile.survey = answersArr;
         alert('Thank you for completing your survey! Please scroll down to meet your new best friend!');
       }
-      
+      $("#name").val("");
+      $("#photo").val("");
       renderSurvey();
     });
     //end of #submit on "click"
@@ -240,8 +241,7 @@
           console.log("postProfile() else ")
         }
 
-        $("#name").val("");
-        $("#photo").val("");
+
         //answer option
 
 
